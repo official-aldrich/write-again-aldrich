@@ -1,0 +1,10 @@
+export type Category = 'Personal growth' | 'Admissions' | 'Argument & ethics' | 'Society & culture' | 'Education' | 'Technology' | 'Creative nonfiction' | 'Leadership';
+export type Prompt = { id: string; title: string; question: string; category: Category; level: number; minWords: number; maxWords: number; minutes: number; hints: string[]; kind: 'personal' | 'argument' | 'micro'; lessonId?: string };
+export type Lesson = { id: string; stage: number; title: string; subtitle: string; minutes: number; sections: {title: string; body: string}[]; before: string; after: string; why: string; check: {question: string; options: string[]; answer: number; explanation: string}; prompt: Prompt; checklist: string[] };
+export type RubricRow = {label: string; score: number; max: number; detail: string};
+export type FeedbackItem = {title: string; observation: string; action: string; quote?: string; severity: 'priority' | 'polish'};
+export type Review = {score: number; band: string; mode: 'rubric'; tone: 'direct' | 'gentle'; summary: string; rubric: RubricRow[]; issues: FeedbackItem[]; strengths: string[]; metrics: {words: number; sentences: number; paragraphs: number; avgSentence: number; longSentences: number; repetition: {word: string; count: number}[]}; questions: string[]; version: number};
+export type Draft = {id: string; prompt: Prompt; title: string; text: string; outline: string[]; updatedAt: string; createdAt: string; completedChecks: string[]};
+export type Attempt = {id: string; draftId: string; text: string; title: string; prompt: Prompt; review: Review; createdAt: string; updatedAt: string; reflection: string};
+export type Completion = {lessonId: string; attemptId: string; completedAt: string};
+export type Workspace = {version: 1; drafts: Draft[]; attempts: Attempt[]; completions: Completion[]; bookmarks: string[]; settings: {tone: 'direct' | 'gentle'; dailyMinutes: number}; settingsUpdatedAt: string; updatedAt: string};
